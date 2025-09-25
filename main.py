@@ -39,4 +39,6 @@ fare_rates = {
     "Economy": {"Standard": 0.13, "VIP": 0.18},
     "Premium": {"VIP": 0.22}
 }
+borneo_flat_fares = {"Standard": 60, "VIP": 90}
+
 
