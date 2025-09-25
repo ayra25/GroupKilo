@@ -56,3 +56,16 @@ for state, stops in terminals.items():
         all_terminals.append((stop, state))
         print(f"{count}. {stop} ({state})")
         count += 1
+
+while True:
+    try:
+        dep_index = int(input("\nEnter Departure Terminal (number): ")) - 1
+        dest_index = int(input("Enter Destination Terminal (number): ")) - 1
+        departure, dep_state = all_terminals[dep_index]
+        destination, dest_state = all_terminals[dest_index]
+        if departure == destination:
+            print("❌ Departure and destination cannot be the same.")
+            continue
+        break
+    except (ValueError, IndexError):
+        print("❌ Invalid terminal number, please try again.")
