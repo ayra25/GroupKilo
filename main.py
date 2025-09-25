@@ -41,4 +41,18 @@ fare_rates = {
 }
 borneo_flat_fares = {"Standard": 60, "VIP": 90}
 
+if region_choice == "1":
+    terminals = peninsular_terminals
+    region_name = "Peninsular Malaysia"
+else:
+    terminals = borneo_terminals
+    region_name = "Borneo"
 
+all_terminals = []
+print(f"\nAvailable Bus Terminals in {region_name}:")
+count = 1
+for state, stops in terminals.items():
+    for stop in stops:
+        all_terminals.append((stop, state))
+        print(f"{count}. {stop} ({state})")
+        count += 1
