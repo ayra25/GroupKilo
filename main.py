@@ -24,3 +24,10 @@ peninsular_terminals = {
     "Terengganu": ["Kuala Terengganu MBKT Terminal"],
     "Pahang": ["Kuantan Sentral", "Temerloh Terminal"]
 }
+
+borneo_terminals = {
+    "Sabah": ["Kota Kinabalu Inanam Terminal", "Sandakan Terminal", "Tawau Terminal"],
+    "Sarawak": ["Kuching Sentral", "Sibu Terminal", "Miri Terminal", "Bintulu Terminal"],
+    "Labuan": ["Labuan Terminal"]
+}
+
