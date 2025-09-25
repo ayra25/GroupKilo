@@ -69,3 +69,7 @@ while True:
         break
     except (ValueError, IndexError):
         print("❌ Invalid terminal number, please try again.")
+
+date = input("Enter Travel Date (DD/MM/YYYY): ")
+time = choose_departure_time()
+pax = int(input("Enter Total Passengers: "))
