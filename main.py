@@ -31,3 +31,6 @@ borneo_terminals = {
     "Labuan": ["Labuan Terminal"]
 }
 
+peninsular_companies = ["Transnasional", "Plusliner", "MARA Liner", "KKKL Express"]
+borneo_companies = ["Borneo Express", "Sipitang Express", "Sungei Merah", "Miri Express"]
+
