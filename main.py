@@ -77,3 +77,9 @@ pax = int(input("Enter Total Passengers: "))
 print("\nAvailable Bus Companies:")
 for i, company in enumerate(companies, start=1):
     print(f"{i}. {company}")
+try:
+    company_choice = int(input("Choose your bus company (number): "))
+    chosen_company = companies[company_choice - 1]
+except (ValueError, IndexError):
+    print("\n❌ Invalid company choice. Restart system.")
+    exit()
