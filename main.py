@@ -16,13 +16,18 @@ import qrcode
 
 def choose_region():
     while True:  # while loop to validate user input
+        print("=================================")
+        print("   🚌 Bus Ticket Booking System")
+        print("=================================\n")
         print("Choose Region:")
         print("1. Peninsular Malaysia")
         print("2. Borneo (Sabah & Sarawak)")
+        
         region_choice = input("Enter choice (1/2): ")
         if region_choice in ["1", "2"]:
             return int(region_choice)
         print("❌ Invalid choice, please enter 1 or 2.\n")
+
 
 
 # Step 2 (Kadeeysa) — choose_terminals(region_choice)
