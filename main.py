@@ -127,6 +127,37 @@ def compute_company_fares(region_choice, distance):
                     company_fares.append((company, seat_type, price))
     return company_fares
 
+# Step 5 (Ipan) — choose_company_and_seat()
+
+def choose_company_and_seat_peninsular(company_fares):
+    print("\nAvailable Bus Companies with Fares:")
+    for company, seat, price in company_fares:
+        print(f"- {company} ({seat}) → RM{price:.2f}")
+
+    while True:  # while loop to validate input
+        chosen_company = input("\nEnter chosen Bus Company: ")
+        seat_options = [(seat, price) for comp, seat, price in company_fares if comp.lower() == chosen_company.lower()]
+        if seat_options:
+            break
+        print("❌ Invalid company name, please try again.")
+
+    if len(seat_options) == 1:
+        chosen_seat_type, price_per_ticket = seat_options[0]
+        print(f"\n✅ {chosen_company} only has {chosen_seat_type} → selected automatically.")
+    else:
+        while True:  # while loop for seat choice
+            print("\nAvailable Seat Types:")
+            for i, (seat, price) in enumerate(seat_options, start=1):
+                print(f"{i}. {seat} → RM{price:.2f}")
+            try:
+                seat_choice = int(input("Choose seat type (number): "))
+                chosen_seat_type, price_per_ticket = seat_options[seat_choice - 1]
+                break
+            except (ValueError, IndexError):
+                print("❌ Invalid choice, please try again.")
+
+    return chosen_company, chosen_seat_type, price_per_ticket
+
 # Main Program
 
 def main():
