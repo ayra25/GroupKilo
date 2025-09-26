@@ -198,6 +198,11 @@ def choose_departure_time():
         except ValueError:
             print("❌ Please enter a valid number.")
 
+# Step 8 (Ayra) — get_travel_date_and_pax()
+
+def get_travel_date_and_pax():
+    date = input("Enter Travel Date (DD/MM/YYYY): ")
+
 
 # Main Program
 
