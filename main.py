@@ -212,6 +212,11 @@ def get_travel_date_and_pax():
         except ValueError:
             print("❌ Please enter a valid number.")
 
+ # Step 9 (Hannan) — get_passenger_names()
+
+def get_passenger_names(pax):
+    return [input(f"Enter Passenger {i+1} Name: ") for i in range(pax)]
+
 
 # Main Program
 
