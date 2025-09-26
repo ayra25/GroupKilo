@@ -217,6 +217,23 @@ def get_travel_date_and_pax():
 def get_passenger_names(pax):
     return [input(f"Enter Passenger {i+1} Name: ") for i in range(pax)]
 
+# Step 10 (Arfa) — generate_and_save_tickets()
+
+def generate_and_save_tickets(passenger_names, chosen_company, departure, destination, date, time, chosen_seat_type, price_per_ticket):
+    tickets = []
+    EGGWHITE = "#F0EAD6"
+
+    for passenger in passenger_names:  # for loop to generate ticket per passenger
+        W, H = 1000, 400
+        ticket_img = Image.new("RGB", (W, H), EGGWHITE)  # Pillow creates image
+        draw = ImageDraw.Draw(ticket_img)
+
+        try:
+            font_title = ImageFont.truetype("arial.ttf", 28)
+            font_body = ImageFont.truetype("arial.ttf", 22)
+        except:
+            font_title = ImageFont.load_default()
+            font_body = ImageFont.load_default()
 
 # Main Program
 
