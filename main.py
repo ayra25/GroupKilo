@@ -108,3 +108,5 @@ def main():
     region_choice = choose_region()
     # Step 2 (Kadeesya)
     departure, dep_state, destination, dest_state = choose_terminals(region_choice)
+    # Step 3 (Ayra)
+    distance = compute_distance(departure, destination, dep_state, dest_state)
