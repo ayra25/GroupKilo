@@ -198,6 +198,20 @@ def choose_departure_time():
         except ValueError:
             print("❌ Please enter a valid number.")
 
+# Step 8 (Ayra) — get_travel_date_and_pax()
+
+def get_travel_date_and_pax():
+    date = input("Enter Travel Date (DD/MM/YYYY): ")
+    while True:
+        try:
+            pax = int(input("Enter Total Passengers: "))
+            if pax > 0:
+                return date, pax
+            else:
+                print("❌ Number of passengers must be greater than 0.")
+        except ValueError:
+            print("❌ Please enter a valid number.")
+
 
 # Main Program
 
@@ -217,4 +231,6 @@ def main():
         chosen_company, chosen_seat_type, price_per_ticket = choose_company_and_seat_borneo()
      # Step 6 (Hannan)
     time = choose_departure_time()
+    # Step 8 (Ayra)
+    date, pax = get_travel_date_and_pax()
    
