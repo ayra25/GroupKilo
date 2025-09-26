@@ -190,7 +190,14 @@ def choose_departure_time():
         print(f"{i}. {time}")
     while True:  # while loop for validation
         try:
-            
+            choice = int(input("Enter choice (1-3): "))
+            if 1 <= choice <= len(DEPARTURE_TIMES):
+                return DEPARTURE_TIMES[choice - 1]
+            else:
+                print("❌ Invalid choice, please select 1-3.")
+        except ValueError:
+            print("❌ Please enter a valid number.")
+
 
 # Main Program
 
