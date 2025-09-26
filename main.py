@@ -124,3 +124,18 @@ passenger_names = []
 for i in range(pax):
     name = input(f"Enter Passenger {i+1} Name: ")
     passenger_names.append(name)
+
+tickets = []
+EGGWHITE = "#F0EAD6"
+
+for idx, passenger in enumerate(passenger_names, start=1):
+    W, H = 1000, 400
+    ticket_img = Image.new("RGB", (W, H), EGGWHITE)
+    draw = ImageDraw.Draw(ticket_img)
+
+    try:
+        font_title = ImageFont.truetype("arial.ttf", 28)
+        font_body = ImageFont.truetype("arial.ttf", 22)
+    except:
+        font_title = ImageFont.load_default()
+        font_body = ImageFont.load_default()
