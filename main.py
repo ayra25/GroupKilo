@@ -180,6 +180,25 @@ def choose_company_and_seat_borneo():
         except (ValueError, IndexError):
             print("❌ Invalid choice, please try again.")
 
+# Step 6 (Hannan) — choose_departure_time()
+
+DEPARTURE_TIMES = ["08:00 AM", "01:00 PM", "06:00 PM"]
+
+def choose_departure_time():
+    print("\nAvailable Departure Times:")
+    for i, time in enumerate(DEPARTURE_TIMES, start=1):
+        print(f"{i}. {time}")
+    while True:  # while loop for validation
+        try:
+            choice = int(input("Enter choice (1-3): "))
+            if 1 <= choice <= len(DEPARTURE_TIMES):
+                return DEPARTURE_TIMES[choice - 1]
+            else:
+                print("❌ Invalid choice, please select 1-3.")
+        except ValueError:
+            print("❌ Please enter a valid number.")
+
+
 # Main Program
 
 def main():
@@ -191,3 +210,11 @@ def main():
     distance = compute_distance(departure, destination, dep_state, dest_state)
      # Step 4 (Ezra)
     company_fares = compute_company_fares(region_choice, distance)
+    # Step 5 (Ipan)
+    if region_choice == 1:
+        chosen_company, chosen_seat_type, price_per_ticket = choose_company_and_seat_peninsular(company_fares)
+    else:
+        chosen_company, chosen_seat_type, price_per_ticket = choose_company_and_seat_borneo()
+     # Step 6 (Hannan)
+    time = choose_departure_time()
+   
