@@ -127,6 +127,59 @@ def compute_company_fares(region_choice, distance):
                     company_fares.append((company, seat_type, price))
     return company_fares
 
+# Step 5 (Ipan) — choose_company_and_seat()
+
+def choose_company_and_seat_peninsular(company_fares):
+    print("\nAvailable Bus Companies with Fares:")
+    for company, seat, price in company_fares:
+        print(f"- {company} ({seat}) → RM{price:.2f}")
+
+    while True:  # while loop to validate input
+        chosen_company = input("\nEnter chosen Bus Company: ")
+        seat_options = [(seat, price) for comp, seat, price in company_fares if comp.lower() == chosen_company.lower()]
+        if seat_options:
+            break
+        print("❌ Invalid company name, please try again.")
+
+    if len(seat_options) == 1:
+        chosen_seat_type, price_per_ticket = seat_options[0]
+        print(f"\n✅ {chosen_company} only has {chosen_seat_type} → selected automatically.")
+    else:
+        while True:  # while loop for seat choice
+            print("\nAvailable Seat Types:")
+            for i, (seat, price) in enumerate(seat_options, start=1):
+                print(f"{i}. {seat} → RM{price:.2f}")
+            try:
+                seat_choice = int(input("Choose seat type (number): "))
+                chosen_seat_type, price_per_ticket = seat_options[seat_choice - 1]
+                break
+            except (ValueError, IndexError):
+                print("❌ Invalid choice, please try again.")
+
+    return chosen_company, chosen_seat_type, price_per_ticket
+
+def choose_company_and_seat_borneo():
+    print("\nAvailable Bus Companies (Flat Fare):")
+    for company in bus_companies_borneo:
+        print(f"- {company}")
+    while True:
+        chosen_company = input("\nEnter chosen Bus Company: ")
+        if chosen_company in bus_companies_borneo:
+            break
+        print("❌ Invalid company name, please try again.")
+
+    while True:  # while loop for seat type
+        print("\nSeat Types with Flat Fare:")
+        for i, (seat_type, fare) in enumerate(borneo_flat_fares.items(), start=1):
+            print(f"{i}. {seat_type} → RM{fare:.2f}")
+        try:
+            seat_choice = int(input("Choose seat type (number): "))
+            chosen_seat_type = list(borneo_flat_fares.keys())[seat_choice - 1]
+            price_per_ticket = borneo_flat_fares[chosen_seat_type]
+            return chosen_company, chosen_seat_type, price_per_ticket
+        except (ValueError, IndexError):
+            print("❌ Invalid choice, please try again.")
+
 # Main Program
 
 def main():
