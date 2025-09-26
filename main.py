@@ -231,4 +231,6 @@ def main():
         chosen_company, chosen_seat_type, price_per_ticket = choose_company_and_seat_borneo()
      # Step 6 (Hannan)
     time = choose_departure_time()
+    # Step 8 (Ayra)
+    date, pax = get_travel_date_and_pax()
    
