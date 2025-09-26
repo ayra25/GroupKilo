@@ -202,6 +202,15 @@ def choose_departure_time():
 
 def get_travel_date_and_pax():
     date = input("Enter Travel Date (DD/MM/YYYY): ")
+    while True:
+        try:
+            pax = int(input("Enter Total Passengers: "))
+            if pax > 0:
+                return date, pax
+            else:
+                print("❌ Number of passengers must be greater than 0.")
+        except ValueError:
+            print("❌ Please enter a valid number.")
 
 
 # Main Program
