@@ -101,6 +101,22 @@ def compute_distance(departure, destination, dep_state, dest_state):
         distance = DEFAULT_SAME_STATE if dep_state == dest_state else DEFAULT_DIFF_STATE
     return distance
 
+# Step 4 (Ezra) — compute_company_fares()
+
+fare_rates = {
+    "Budget": {"Standard": 0.11},
+    "Economy": {"Standard": 0.13, "VIP": 0.18},
+    "Premium": {"VIP": 0.22}
+}
+borneo_flat_fares = {"Standard": 60, "VIP": 90}
+
+bus_companies_peninsular = {
+    "Budget": ["MARA Liner", "Musafir Express", "Cepat Express"],
+    "Economy": ["Transnasional", "Plusliner", "Sri Maju Express", "KKKL Express", "Sani Express"],
+    "Premium": ["Aeroline", "Super Nice Express", "Billion Stars", "Mutiara LUXE", "Causeway Link Premium Express"]
+}
+bus_companies_borneo = ["Borneo Express", "Sipitang Express", "Sungei Merah", "Miri Express"]
+
 # Main Program
 
 def main():
