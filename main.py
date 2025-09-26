@@ -136,3 +136,5 @@ def main():
     departure, dep_state, destination, dest_state = choose_terminals(region_choice)
     # Step 3 (Ayra)
     distance = compute_distance(departure, destination, dep_state, dest_state)
+     # Step 4 (Ezra)
+    company_fares = compute_company_fares(region_choice, distance)
