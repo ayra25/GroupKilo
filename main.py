@@ -171,3 +171,12 @@ for idx, passenger in enumerate(passenger_names, start=1):
     ticket_img.paste(qr, (W-200, H-200))
 
     tickets.append(ticket_img)
+
+
+stack_height = sum(ticket.height for ticket in tickets)
+stacked_img = Image.new("RGB", (tickets[0].width, stack_height), EGGWHITE)
+
+y_offset = 0
+for ticket in tickets:
+    stacked_img.paste(ticket, (0, y_offset))
+    y_offset += ticket.height
