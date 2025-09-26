@@ -234,6 +234,28 @@ def generate_and_save_tickets(passenger_names, chosen_company, departure, destin
         except:
             font_title = ImageFont.load_default()
             font_body = ImageFont.load_default()
+draw.rectangle([(0, 0), (W-1, H-1)], outline="black", width=5)  # border
+        draw.text((30, 20), f"{chosen_company.upper()}", font=font_title, fill="black")
+
+        details = [
+            f"Passenger : {passenger}",
+            f"From      : {departure}",
+            f"To        : {destination}",
+            f"Date      : {date}",
+            f"Time      : {time}",
+            f"Seat Type : {chosen_seat_type}",
+            f"Price     : RM{price_per_ticket:.2f}",
+        ]
+        y = 80
+        for line in details:
+            draw.text((30, y), line, font=font_body, fill="black")
+            y += 40
+
+        ticket_id = f"{chosen_company[:3].upper()}-{date.replace('/','')}-{passenger[:3].upper()}"
+        qr = qrcode.make(ticket_id).resize((150, 150))  # generates QR code
+        ticket_img.paste(qr, (W-200, H-200))
+
+        tickets.append(ticket_img)
 
 # Main Program
 
