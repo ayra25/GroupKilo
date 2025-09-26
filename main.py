@@ -80,3 +80,5 @@ def choose_terminals(region_choice):
 def main():
     # Step 1 (Hannan)
     region_choice = choose_region()
+    # Step 2 (Kadeesya)
+    departure, dep_state, destination, dest_state = choose_terminals(region_choice)
