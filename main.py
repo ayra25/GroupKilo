@@ -194,3 +194,10 @@ print(f"🎟 All tickets saved as {filename}")
 
 # Auto open
 stacked_img.show()
+
+
+# Main Program
+
+def main():
+    # Step 1 (Hannan)
+    region_choice = choose_region()
