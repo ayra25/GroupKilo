@@ -271,7 +271,7 @@ def generate_and_save_tickets(passenger_names, chosen_company, departure, destin
     print(f"\n🎟 All tickets saved as {filename}")
     stacked_img.show()
 
-    
+
 # Main Program
 
 def main():
@@ -294,3 +294,8 @@ def main():
     date, pax = get_travel_date_and_pax()
    # Step 9 (Hannan)
     passenger_names = get_passenger_names(pax)
+    # Step 10 (Arfa)
+    generate_and_save_tickets(passenger_names, chosen_company, departure, destination, date, time, chosen_seat_type, price_per_ticket)
+
+if __name__ == "__main__":
+    main()
