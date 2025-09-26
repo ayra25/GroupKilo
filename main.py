@@ -238,4 +238,5 @@ def main():
     time = choose_departure_time()
     # Step 8 (Ayra)
     date, pax = get_travel_date_and_pax()
-   
+   # Step 9 (Hannan)
+    passenger_names = get_passenger_names(pax)
