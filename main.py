@@ -36,6 +36,23 @@ borneo_terminals = {
     "Labuan": ["Labuan Terminal"]
 }
 
+def choose_terminals(region_choice):
+    if region_choice == 1:
+        terminals = peninsular_terminals
+        region_name = "Peninsular Malaysia"
+    else:
+        terminals = borneo_terminals
+        region_name = "Borneo"
+
+    all_terminals = []
+    print(f"\nAvailable Bus Terminals in {region_name}:")
+    count = 1
+    for state, stops in terminals.items():  # for loop to display terminals
+        for stop in stops:
+            all_terminals.append((stop, state))
+            print(f"{count}. {stop} ({state})")
+            count += 1
+
 peninsular_companies = ["Transnasional", "Plusliner", "MARA Liner", "KKKL Express"]
 borneo_companies = ["Borneo Express", "Sipitang Express", "Sungei Merah", "Miri Express"]
 
