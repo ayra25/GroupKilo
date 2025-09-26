@@ -180,7 +180,7 @@ def choose_company_and_seat_borneo():
         except (ValueError, IndexError):
             print("❌ Invalid choice, please try again.")
 
-            # Step 6 (Hannan) — choose_departure_time()
+# Step 6 (Hannan) — choose_departure_time()
 
 DEPARTURE_TIMES = ["08:00 AM", "01:00 PM", "06:00 PM"]
 
@@ -215,4 +215,6 @@ def main():
         chosen_company, chosen_seat_type, price_per_ticket = choose_company_and_seat_peninsular(company_fares)
     else:
         chosen_company, chosen_seat_type, price_per_ticket = choose_company_and_seat_borneo()
+     # Step 6 (Hannan)
+    time = choose_departure_time()
    
