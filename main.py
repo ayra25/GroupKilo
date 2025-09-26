@@ -9,6 +9,12 @@
 from PIL import Image, ImageDraw, ImageFont
 import qrcode
 
+# Step 1: Ask region
+print("Choose Region:")
+print("1. Peninsular Malaysia")
+print("2. Borneo (Sabah & Sarawak)")
+region_choice = input("Enter choice (1/2): ")
+
 
 peninsular_terminals = {
     "Kuala Lumpur": ["TBS (Terminal Bersepadu Selatan)"],
