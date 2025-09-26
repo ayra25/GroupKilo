@@ -124,3 +124,63 @@ passenger_names = []
 for i in range(pax):
     name = input(f"Enter Passenger {i+1} Name: ")
     passenger_names.append(name)
+
+tickets = []
+EGGWHITE = "#F0EAD6"
+
+for idx, passenger in enumerate(passenger_names, start=1):
+    W, H = 1000, 400
+    ticket_img = Image.new("RGB", (W, H), EGGWHITE)
+    draw = ImageDraw.Draw(ticket_img)
+
+    try:
+        font_title = ImageFont.truetype("arial.ttf", 28)
+        font_body = ImageFont.truetype("arial.ttf", 22)
+    except:
+        font_title = ImageFont.load_default()
+        font_body = ImageFont.load_default()
+
+       
+    border_color = "black"
+    border_thickness = 5
+    draw.rectangle([(0, 0), (W-1, H-1)], outline=border_color, width=border_thickness)
+
+   
+    draw.text((30, 20), f"{chosen_company.upper()}", font=font_title, fill="black")
+
+    
+    details = [
+        f"Passenger : {passenger}",
+        f"From      : {departure}",
+        f"To        : {destination}",
+        f"Date      : {date}",
+        f"Time      : {time}",
+        f"Seat Type : {seat_type}",
+        f"Price     : RM{price_per_ticket:.2f}",
+    ]
+
+    y = 80
+    for line in details:
+        draw.text((30, y), line, font=font_body, fill="black")
+        y += 40
+
+       
+    ticket_id = f"{chosen_company[:3].upper()}-{date.replace('/','')}-{passenger[:3].upper()}"
+    qr = qrcode.make(ticket_id)
+    qr = qr.resize((150, 150))
+    ticket_img.paste(qr, (W-200, H-200))
+
+    tickets.append(ticket_img)
+
+
+stack_height = sum(ticket.height for ticket in tickets)
+stacked_img = Image.new("RGB", (tickets[0].width, stack_height), EGGWHITE)
+
+y_offset = 0
+for ticket in tickets:
+    stacked_img.paste(ticket, (0, y_offset))
+    y_offset += ticket.height
+
+filename = f"tickets_{chosen_company.replace(' ', '')}{date.replace('/', '-')}.png"
+stacked_img.save(filename)
+print(f"🎟 All tickets saved as {filename}"
