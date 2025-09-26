@@ -95,6 +95,12 @@ distances_km = {
 DEFAULT_SAME_STATE = 50
 DEFAULT_DIFF_STATE = 250
 
+def compute_distance(departure, destination, dep_state, dest_state):
+    distance = distances_km.get((departure, destination)) or distances_km.get((destination, departure))
+    if not distance:
+        distance = DEFAULT_SAME_STATE if dep_state == dest_state else DEFAULT_DIFF_STATE
+    return distance
+
 # Main Program
 
 def main():
