@@ -225,6 +225,60 @@ def get_travel_date_and_pax():
 def get_passenger_names(pax):
     return [input(f"Enter Passenger {i+1} Name: ") for i in range(pax)]
 
+# Step 10 (Arfa) — generate_and_save_tickets()
+
+def generate_and_save_tickets(passenger_names, chosen_company, departure, destination, date, time, chosen_seat_type, price_per_ticket):
+    tickets = []
+    EGGWHITE = "#F0EAD6"
+
+    for passenger in passenger_names:  # for loop to generate ticket per passenger
+        W, H = 1000, 400
+        ticket_img = Image.new("RGB", (W, H), EGGWHITE)  # Pillow creates image
+        draw = ImageDraw.Draw(ticket_img)
+
+        try:
+            font_title = ImageFont.truetype("arial.ttf", 28)
+            font_body = ImageFont.truetype("arial.ttf", 22)
+        except:
+            font_title = ImageFont.load_default()
+            font_body = ImageFont.load_default()
+
+        draw.rectangle([(0, 0), (W-1, H-1)], outline="black", width=5)  # border
+        draw.text((30, 20), f"{chosen_company.upper()}", font=font_title, fill="black")
+
+        details = [
+            f"Passenger : {passenger}",
+            f"From      : {departure}",
+            f"To        : {destination}",
+            f"Date      : {date}",
+            f"Time      : {time}",
+            f"Seat Type : {chosen_seat_type}",
+            f"Price     : RM{price_per_ticket:.2f}",
+        ]
+        y = 80
+        for line in details:
+            draw.text((30, y), line, font=font_body, fill="black")
+            y += 40
+
+        ticket_id = f"{chosen_company[:3].upper()}-{date.replace('/','')}-{passenger[:3].upper()}"
+        qr = qrcode.make(ticket_id).resize((150, 150))  # generates QR code
+        ticket_img.paste(qr, (W-200, H-200))
+
+        tickets.append(ticket_img)
+
+# stack all tickets vertically
+    stack_height = sum(t.height for t in tickets)
+    stacked_img = Image.new("RGB", (tickets[0].width, stack_height), EGGWHITE)
+    y_offset = 0
+    for t in tickets:
+        stacked_img.paste(t, (0, y_offset))
+        y_offset += t.height
+
+    filename = f"tickets_{chosen_company.replace(' ', '')}_{date.replace('/', '-')}.png"
+    stacked_img.save(filename)
+    print(f"\n🎟 All tickets saved as {filename}")
+    stacked_img.show()
+
 
 # Step 10 (Arfa) — generate_and_save_tickets()
 
