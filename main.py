@@ -13,10 +13,10 @@ print("========================================")
 print("      🚌 Bus Ticket Booking System")
 print("========================================\n")
 
-# Step 1 (Hannan) — choose_region()
+
 
 def choose_region():
-    while True:  # while loop to validate user input
+    while True:  
         print("Choose Region:")
         print("1. Peninsular Malaysia")
         print("2. Borneo (Sabah & Sarawak)")
@@ -46,6 +46,22 @@ borneo_terminals = {
     "Labuan": ["Labuan Terminal"]
 }
 
+def choose_terminals(region_choice):
+    if region_choice == 1:
+        terminals = peninsular_terminals
+        region_name = "Peninsular Malaysia"
+    else:
+        terminals = borneo_terminals
+        region_name = "Borneo"
+
+    all_terminals = []
+    print(f"\nAvailable Bus Terminals in {region_name}:")
+    count = 1
+    for state, stops in terminals.items():  
+        for stop in stops:
+            all_terminals.append((stop, state))
+            print(f"{count}. {stop} ({state})")
+            count += 1
 # Main Program
 
 def main():
