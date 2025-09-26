@@ -180,3 +180,7 @@ y_offset = 0
 for ticket in tickets:
     stacked_img.paste(ticket, (0, y_offset))
     y_offset += ticket.height
+
+filename = f"tickets_{chosen_company.replace(' ', '')}{date.replace('/', '-')}.png"
+stacked_img.save(filename)
+print(f"🎟 All tickets saved as {filename}"
