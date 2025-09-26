@@ -117,6 +117,16 @@ bus_companies_peninsular = {
 }
 bus_companies_borneo = ["Borneo Express", "Sipitang Express", "Sungei Merah", "Miri Express"]
 
+def compute_company_fares(region_choice, distance):
+    company_fares = []
+    if region_choice == 1:  # Peninsular fares
+        for category, comps in bus_companies_peninsular.items():  # nested for loops
+            for company in comps:
+                for seat_type, rate in fare_rates[category].items():
+                    price = distance * rate
+                    company_fares.append((company, seat_type, price))
+    return company_fares
+
 # Main Program
 
 def main():
