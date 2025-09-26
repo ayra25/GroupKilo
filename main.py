@@ -139,3 +139,27 @@ for idx, passenger in enumerate(passenger_names, start=1):
     except:
         font_title = ImageFont.load_default()
         font_body = ImageFont.load_default()
+
+       
+    border_color = "black"
+    border_thickness = 5
+    draw.rectangle([(0, 0), (W-1, H-1)], outline=border_color, width=border_thickness)
+
+   
+    draw.text((30, 20), f"{chosen_company.upper()}", font=font_title, fill="black")
+
+    
+    details = [
+        f"Passenger : {passenger}",
+        f"From      : {departure}",
+        f"To        : {destination}",
+        f"Date      : {date}",
+        f"Time      : {time}",
+        f"Seat Type : {seat_type}",
+        f"Price     : RM{price_per_ticket:.2f}",
+    ]
+
+    y = 80
+    for line in details:
+        draw.text((30, y), line, font=font_body, fill="black")
+        y += 40
