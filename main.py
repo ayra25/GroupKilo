@@ -101,6 +101,32 @@ def compute_distance(departure, destination, dep_state, dest_state):
         distance = DEFAULT_SAME_STATE if dep_state == dest_state else DEFAULT_DIFF_STATE
     return distance
 
+# Step 4 (Ezra) — compute_company_fares()
+
+fare_rates = {
+    "Budget": {"Standard": 0.11},
+    "Economy": {"Standard": 0.13, "VIP": 0.18},
+    "Premium": {"VIP": 0.22}
+}
+borneo_flat_fares = {"Standard": 60, "VIP": 90}
+
+bus_companies_peninsular = {
+    "Budget": ["MARA Liner", "Musafir Express", "Cepat Express"],
+    "Economy": ["Transnasional", "Plusliner", "Sri Maju Express", "KKKL Express", "Sani Express"],
+    "Premium": ["Aeroline", "Super Nice Express", "Billion Stars", "Mutiara LUXE", "Causeway Link Premium Express"]
+}
+bus_companies_borneo = ["Borneo Express", "Sipitang Express", "Sungei Merah", "Miri Express"]
+
+def compute_company_fares(region_choice, distance):
+    company_fares = []
+    if region_choice == 1:  # Peninsular fares
+        for category, comps in bus_companies_peninsular.items():  # nested for loops
+            for company in comps:
+                for seat_type, rate in fare_rates[category].items():
+                    price = distance * rate
+                    company_fares.append((company, seat_type, price))
+    return company_fares
+
 # Main Program
 
 def main():
@@ -110,3 +136,5 @@ def main():
     departure, dep_state, destination, dest_state = choose_terminals(region_choice)
     # Step 3 (Ayra)
     distance = compute_distance(departure, destination, dep_state, dest_state)
+     # Step 4 (Ezra)
+    company_fares = compute_company_fares(region_choice, distance)
