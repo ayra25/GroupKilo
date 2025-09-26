@@ -234,7 +234,8 @@ def generate_and_save_tickets(passenger_names, chosen_company, departure, destin
         except:
             font_title = ImageFont.load_default()
             font_body = ImageFont.load_default()
-draw.rectangle([(0, 0), (W-1, H-1)], outline="black", width=5)  # border
+
+        draw.rectangle([(0, 0), (W-1, H-1)], outline="black", width=5)  # border
         draw.text((30, 20), f"{chosen_company.upper()}", font=font_title, fill="black")
 
         details = [
@@ -257,6 +258,20 @@ draw.rectangle([(0, 0), (W-1, H-1)], outline="black", width=5)  # border
 
         tickets.append(ticket_img)
 
+# stack all tickets vertically
+    stack_height = sum(t.height for t in tickets)
+    stacked_img = Image.new("RGB", (tickets[0].width, stack_height), EGGWHITE)
+    y_offset = 0
+    for t in tickets:
+        stacked_img.paste(t, (0, y_offset))
+        y_offset += t.height
+
+    filename = f"tickets_{chosen_company.replace(' ', '')}_{date.replace('/', '-')}.png"
+    stacked_img.save(filename)
+    print(f"\n🎟 All tickets saved as {filename}")
+    stacked_img.show()
+
+    
 # Main Program
 
 def main():
