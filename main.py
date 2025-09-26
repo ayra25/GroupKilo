@@ -10,6 +10,11 @@ from PIL import Image, ImageDraw, ImageFont
 import qrcode
 
 
+print("Choose Region:")
+print("1. Peninsular Malaysia")
+print("2. Borneo (Sabah & Sarawak)")
+region_choice = input("Enter choice (1/2): ")
+
 peninsular_terminals = {
     "Kuala Lumpur": ["TBS (Terminal Bersepadu Selatan)"],
     "Selangor": ["Shah Alam Terminal", "Klang Sentral"],
@@ -82,5 +87,9 @@ try:
     chosen_company = companies[company_choice - 1]
 except (ValueError, IndexError):
     print("\n❌ Invalid company choice. Restart system.")
-    exit()
+    exit()
 
+passenger_names = []
+for i in range(pax):
+    name = input(f"Enter Passenger {i+1} Name: ")
+    passenger_names.append(name)
