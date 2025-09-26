@@ -30,7 +30,7 @@ def choose_region():
 
 
 
-# Step 2 (Kadeeysa) — choose_terminals(region_choice)
+# Step 2 (Kadeesya) — choose_terminals(region_choice)
 
 peninsular_terminals = {
     "Kuala Lumpur": ["TBS (Terminal Bersepadu Selatan)"],
