@@ -6,17 +6,16 @@
 # 2. Install qrcode: pip install qrcode
 # 3. Run : Click "run" button and click "start debugging" and choose python debugger
 
+
+
 from PIL import Image, ImageDraw, ImageFont
 import qrcode
 
-print("========================================")
-print("      🚌 Bus Ticket Booking System")
-print("========================================\n")
 
-
+# Step 1 (Hannan) — choose_region()
 
 def choose_region():
-    while True:  
+    while True:  # while loop to validate user input
         print("Choose Region:")
         print("1. Peninsular Malaysia")
         print("2. Borneo (Sabah & Sarawak)")
@@ -24,6 +23,9 @@ def choose_region():
         if region_choice in ["1", "2"]:
             return int(region_choice)
         print("❌ Invalid choice, please enter 1 or 2.\n")
+
+
+# Step 2 (Kadeeysa) — choose_terminals(region_choice)
 
 peninsular_terminals = {
     "Kuala Lumpur": ["TBS (Terminal Bersepadu Selatan)"],
@@ -57,13 +59,13 @@ def choose_terminals(region_choice):
     all_terminals = []
     print(f"\nAvailable Bus Terminals in {region_name}:")
     count = 1
-    for state, stops in terminals.items():  
+    for state, stops in terminals.items():  # for loop to display terminals
         for stop in stops:
             all_terminals.append((stop, state))
             print(f"{count}. {stop} ({state})")
             count += 1
 
-    while True: 
+    while True:  # while loop to validate terminal choices
         try:
             dep_index = int(input("\nEnter Departure Terminal (number): ")) - 1
             dest_index = int(input("Enter Destination Terminal (number): ")) - 1
@@ -74,7 +76,8 @@ def choose_terminals(region_choice):
                 continue
             return departure, dep_state, destination, dest_state
         except (ValueError, IndexError):
-            print("❌ Invalid terminal number, please try again.")     
+            print("❌ Invalid terminal number, please try again.")
+
 
 # Step 3 (Ayra) — compute_distance()
 
@@ -101,6 +104,7 @@ def compute_distance(departure, destination, dep_state, dest_state):
         distance = DEFAULT_SAME_STATE if dep_state == dest_state else DEFAULT_DIFF_STATE
     return distance
 
+
 # Step 4 (Ezra) — compute_company_fares()
 
 fare_rates = {
@@ -126,6 +130,7 @@ def compute_company_fares(region_choice, distance):
                     price = distance * rate
                     company_fares.append((company, seat_type, price))
     return company_fares
+
 
 # Step 5 (Ipan) — choose_company_and_seat()
 
@@ -180,6 +185,7 @@ def choose_company_and_seat_borneo():
         except (ValueError, IndexError):
             print("❌ Invalid choice, please try again.")
 
+
 # Step 6 (Hannan) — choose_departure_time()
 
 DEPARTURE_TIMES = ["08:00 AM", "01:00 PM", "06:00 PM"]
@@ -198,6 +204,7 @@ def choose_departure_time():
         except ValueError:
             print("❌ Please enter a valid number.")
 
+
 # Step 8 (Ayra) — get_travel_date_and_pax()
 
 def get_travel_date_and_pax():
@@ -212,10 +219,66 @@ def get_travel_date_and_pax():
         except ValueError:
             print("❌ Please enter a valid number.")
 
- # Step 9 (Hannan) — get_passenger_names()
+
+# Step 9 (Hannan) — get_passenger_names()
 
 def get_passenger_names(pax):
     return [input(f"Enter Passenger {i+1} Name: ") for i in range(pax)]
+
+
+# Step 10 (Arfa) — generate_and_save_tickets()
+
+def generate_and_save_tickets(passenger_names, chosen_company, departure, destination, date, time, chosen_seat_type, price_per_ticket):
+    tickets = []
+    EGGWHITE = "#F0EAD6"
+
+    for passenger in passenger_names:  # for loop to generate ticket per passenger
+        W, H = 1000, 400
+        ticket_img = Image.new("RGB", (W, H), EGGWHITE)  # Pillow creates image
+        draw = ImageDraw.Draw(ticket_img)
+
+        try:
+            font_title = ImageFont.truetype("arial.ttf", 28)
+            font_body = ImageFont.truetype("arial.ttf", 22)
+        except:
+            font_title = ImageFont.load_default()
+            font_body = ImageFont.load_default()
+
+        draw.rectangle([(0, 0), (W-1, H-1)], outline="black", width=5)  # border
+        draw.text((30, 20), f"{chosen_company.upper()}", font=font_title, fill="black")
+
+        details = [
+            f"Passenger : {passenger}",
+            f"From      : {departure}",
+            f"To        : {destination}",
+            f"Date      : {date}",
+            f"Time      : {time}",
+            f"Seat Type : {chosen_seat_type}",
+            f"Price     : RM{price_per_ticket:.2f}",
+        ]
+        y = 80
+        for line in details:
+            draw.text((30, y), line, font=font_body, fill="black")
+            y += 40
+
+        ticket_id = f"{chosen_company[:3].upper()}-{date.replace('/','')}-{passenger[:3].upper()}"
+        qr = qrcode.make(ticket_id).resize((150, 150))  # generates QR code
+        ticket_img.paste(qr, (W-200, H-200))
+
+        tickets.append(ticket_img)
+
+    # stack all tickets vertically
+    stack_height = sum(t.height for t in tickets)
+    stacked_img = Image.new("RGB", (tickets[0].width, stack_height), EGGWHITE)
+    y_offset = 0
+    for t in tickets:
+        stacked_img.paste(t, (0, y_offset))
+        y_offset += t.height
+
+    filename = f"tickets_{chosen_company.replace(' ', '')}_{date.replace('/', '-')}.png"
+    stacked_img.save(filename)
+    print(f"\n🎟 All tickets saved as {filename}")
+    stacked_img.show()
 
 
 # Main Program
@@ -223,20 +286,25 @@ def get_passenger_names(pax):
 def main():
     # Step 1 (Hannan)
     region_choice = choose_region()
-    # Step 2 (Kadeesya)
+    # Step 2 (Kadeeysa)
     departure, dep_state, destination, dest_state = choose_terminals(region_choice)
     # Step 3 (Ayra)
     distance = compute_distance(departure, destination, dep_state, dest_state)
-     # Step 4 (Ezra)
+    # Step 4 (Ezra)
     company_fares = compute_company_fares(region_choice, distance)
     # Step 5 (Ipan)
     if region_choice == 1:
         chosen_company, chosen_seat_type, price_per_ticket = choose_company_and_seat_peninsular(company_fares)
     else:
         chosen_company, chosen_seat_type, price_per_ticket = choose_company_and_seat_borneo()
-     # Step 6 (Hannan)
+    # Step 6 (Hannan)
     time = choose_departure_time()
-    # Step 8 (Ayra)
+    # Step 7 (Ayra)
     date, pax = get_travel_date_and_pax()
-   # Step 9 (Hannan)
+    # Step 8 (Hannan)
     passenger_names = get_passenger_names(pax)
+    # Step 9 (Arfa)
+    generate_and_save_tickets(passenger_names, chosen_company, departure, destination, date, time, chosen_seat_type, price_per_ticket)
+
+if __name__ == "__main__":
+    main()
