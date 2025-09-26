@@ -9,12 +9,6 @@
 from PIL import Image, ImageDraw, ImageFont
 import qrcode
 
-# Step 1: Ask region
-print("Choose Region:")
-print("1. Peninsular Malaysia")
-print("2. Borneo (Sabah & Sarawak)")
-region_choice = input("Enter choice (1/2): ")
-
 
 peninsular_terminals = {
     "Kuala Lumpur": ["TBS (Terminal Bersepadu Selatan)"],
@@ -77,8 +71,16 @@ while True:
         print("❌ Invalid terminal number, please try again.")
 
 date = input("Enter Travel Date (DD/MM/YYYY): ")
-time = input("Enter Departure Time (e.g. 11:30 AM): ")
+time = choose_departure_time()
 pax = int(input("Enter Total Passengers: "))
 
-
+print("\nAvailable Bus Companies:")
+for i, company in enumerate(companies, start=1):
+    print(f"{i}. {company}")
+try:
+    company_choice = int(input("Choose your bus company (number): "))
+    chosen_company = companies[company_choice - 1]
+except (ValueError, IndexError):
+    print("\n❌ Invalid company choice. Restart system.")
+    exit()
 
