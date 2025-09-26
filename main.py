@@ -74,7 +74,27 @@ def choose_terminals(region_choice):
                 continue
             return departure, dep_state, destination, dest_state
         except (ValueError, IndexError):
-            print("❌ Invalid terminal number, please try again.")        
+            print("❌ Invalid terminal number, please try again.")     
+
+# Step 3 (Ayra) — compute_distance()
+
+distances_km = {
+    ("TBS (Terminal Bersepadu Selatan)", "Sungai Nibong Terminal"): 350,
+    ("TBS (Terminal Bersepadu Selatan)", "Larkin Sentral (Johor Bahru)"): 330,
+    ("TBS (Terminal Bersepadu Selatan)", "Ipoh Amanjaya"): 200,
+    ("TBS (Terminal Bersepadu Selatan)", "Melaka Sentral"): 150,
+    ("TBS (Terminal Bersepadu Selatan)", "Klang Sentral"): 30,
+    ("TBS (Terminal Bersepadu Selatan)", "Shah Alam Terminal"): 25,
+    ("Klang Sentral", "Shah Alam Terminal"): 10,
+    ("Sungai Nibong Terminal", "Kangar Terminal"): 180,
+    ("Ipoh Amanjaya", "Kota Bharu Terminal"): 400,
+    ("Kota Bharu Terminal", "Kuala Terengganu MBKT Terminal"): 170,
+    ("Kuantan Sentral", "TBS (Terminal Bersepadu Selatan)"): 260,
+}
+
+DEFAULT_SAME_STATE = 50
+DEFAULT_DIFF_STATE = 250
+
 # Main Program
 
 def main():
