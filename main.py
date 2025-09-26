@@ -183,4 +183,4 @@ for ticket in tickets:
 
 filename = f"tickets_{chosen_company.replace(' ', '')}{date.replace('/', '-')}.png"
 stacked_img.save(filename)
-print(f"🎟 All tickets saved as {filename}"
+print(f"🎟 All tickets saved as {filename}")
