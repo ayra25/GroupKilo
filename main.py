@@ -163,3 +163,11 @@ for idx, passenger in enumerate(passenger_names, start=1):
     for line in details:
         draw.text((30, y), line, font=font_body, fill="black")
         y += 40
+
+       
+    ticket_id = f"{chosen_company[:3].upper()}-{date.replace('/','')}-{passenger[:3].upper()}"
+    qr = qrcode.make(ticket_id)
+    qr = qr.resize((150, 150))
+    ticket_img.paste(qr, (W-200, H-200))
+
+    tickets.append(ticket_img)
