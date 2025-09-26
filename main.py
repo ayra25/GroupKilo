@@ -83,3 +83,6 @@ try:
 except (ValueError, IndexError):
     print("\n❌ Invalid company choice. Restart system.")
     exit()
+
+def get_passenger_names(pax):
+    return [input(f"Enter Passenger {i+1} Name: ") for i in range(pax)]
